@@ -7,23 +7,26 @@ public class MainMenuManager : MonoBehaviour
 {
     // ссылки на объекты сцены для наглядного управления
     private Transform canvas;
-    private GameObject mainMenuButtons;
-    private GameObject difficultyMenuButtons;
+    private GameObject mainMenu;
+    private GameObject difficultyMenu;
+    private GameObject settingsMenu;
 
     private void Start()
     {
         canvas = transform.GetChild(0);
-        mainMenuButtons = canvas.Find("MainMenuBack").gameObject;
-        difficultyMenuButtons = canvas.Find("DifficultyBack").gameObject;
+        mainMenu = canvas.Find("MainMenuPanel").gameObject;
+        difficultyMenu = canvas.Find("DifficultyPanel").gameObject;
+        settingsMenu = canvas.Find("SettingsPanel").gameObject;
     }
     public void OnStartButtonClick()
     {
-        mainMenuButtons.SetActive(false);
-        difficultyMenuButtons.SetActive(true);
+        mainMenu.SetActive(false);
+        difficultyMenu.SetActive(true);
     }
     public void OnSettingsButtonClick()
     {
-
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
     }
     public void OnStatsButtonClick()
     {
@@ -37,4 +40,5 @@ public class MainMenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+    
 }

@@ -213,21 +213,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3032977135715111989, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
-      propertyPath: m_text
-      value: Normal
+    - target: {fileID: 2546630362472470724, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3732820579913935674, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
-      propertyPath: m_Name
-      value: NormalButton
+    - target: {fileID: 4455700105739211911, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4750925703866331105, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
-      propertyPath: m_Name
-      value: EasyButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 4771266747479426195, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
-      propertyPath: m_text
-      value: Hard
+    - target: {fileID: 6057514870637379302, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 80.00001
       objectReference: {fileID: 0}
     - target: {fileID: 6282009198541697481, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
       propertyPath: m_Name
@@ -277,26 +273,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6282009198789530443, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6282009198953491821, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 841390350}
-    - target: {fileID: 6355781842819240174, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
-      propertyPath: m_text
-      value: 'Easy
-
-'
+    - target: {fileID: 7690406706342643038, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6623697718487481244, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
-      propertyPath: m_Name
-      value: HardButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 7267113625371778393, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
+    - target: {fileID: 8217949027502953966, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375412548772628765, guid: ad3b4768d3cd98141bb7b85bf6196f87, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
