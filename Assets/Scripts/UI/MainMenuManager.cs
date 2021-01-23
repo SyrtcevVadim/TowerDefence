@@ -5,13 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // ссылки на объекты сцены для наглядного управления
+    private Transform canvas;
+    private GameObject mainMenu;
+    private GameObject difficultyMenu;
+    private GameObject settingsMenu;
+
+    private void Start()
+    {
+        canvas = transform.GetChild(0);
+        mainMenu = canvas.Find("MainMenuPanel").gameObject;
+        difficultyMenu = canvas.Find("DifficultyPanel").gameObject;
+        settingsMenu = canvas.Find("SettingsPanel").gameObject;
+    }
     public void OnStartButtonClick()
     {
-        SceneManager.LoadScene("Level");
+        mainMenu.SetActive(false);
+        difficultyMenu.SetActive(true);
+    }
+    public void OnSettingsButtonClick()
+    {
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
+    }
+    public void OnStatsButtonClick()
+    {
+
+    }
+    public void OnCreditsButtonClick()
+    {
+
     }
     public void OnExitButtonClick()
     {
         Application.Quit();
     }
+    
 }
