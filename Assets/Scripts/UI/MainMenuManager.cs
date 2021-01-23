@@ -10,6 +10,18 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level");
     }
+    public void OnSettingsButtonClick()
+    {
+
+    }
+    public void OnStatsButtonClick()
+    {
+
+    }
+    public void OnCreditsButtonClick()
+    {
+
+    }
     public void OnExitButtonClick()
     {
         Application.Quit();
