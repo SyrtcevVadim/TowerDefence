@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.A))
         {
-            transform.Translate(new Vector3(0,0,1)*speed*Time.deltaTime);
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, 1) * speed * Time.deltaTime);
         }
     }
 
