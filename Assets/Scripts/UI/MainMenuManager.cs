@@ -41,4 +41,10 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
     }
     
+    // кнопки в настройках
+    public void OnSettingsExitButtonClick()
+    {
+        mainMenu.SetActive(true);
+        settingsMenu.SetActive(false);
+    }
 }
