@@ -27,7 +27,6 @@ public class MovingPath : MonoBehaviour
         
         while(true)
         {
-            print("Следующая точка: " + PathLinks[TargetLinkIndex].name);
             yield return PathLinks[TargetLinkIndex];                            // Вызывается при вызове функции MoveNext() из итератора
 
             TargetLinkIndex += 1;
