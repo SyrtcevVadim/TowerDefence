@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject Bullet;       // Снаряд, которым атакует башня
+    public GameObject BulletPlace;  // Место, откуда вылетают снаряды башни
+    
+    public void OnTriggerEnter(Collider collider)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        print(collider.gameObject.tag);
+        print("Collides!");
     }
 }
