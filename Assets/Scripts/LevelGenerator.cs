@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    public GameObject Terrain;              // Платформа, на которой находятся все игровые объекты
-    public Vector3 StartPosition;           // Позиция, с которой начинается генерация уровня
-    public Vector3 CurrentPosition;         // Позиция для текущего элемента
+    public GameObject Terrain;              // Terrain platform prefab
+    public Vector3 StartPosition;           // Top left corner coordinates of field
+    public Vector3 CurrentPosition;         // Current platform position
     public void Awake()
     {
         StartPosition = Vector3.zero;
         CurrentPosition = Vector3.zero;
-        CreateFields();
+        //CreateFields();
     }
     [ContextMenu("CreateField")]
     public void CreateFields()
