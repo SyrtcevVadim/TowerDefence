@@ -31,6 +31,7 @@ public class Tower : MonoBehaviour
 
     public void OnTriggerExit(Collider collider)
     {
+        print(collider.tag);
         if(collider.gameObject == TargetForAttack)
         {
             if(collider.gameObject == TargetForAttack)
@@ -43,9 +44,18 @@ public class Tower : MonoBehaviour
     }
     public void Update()
     {
+        
         if(TargetForAttack == null && AllTargets.Count != 0)
         {
-            TargetForAttack = AllTargets[0];
+            if (AllTargets[0] == null)
+            {
+                AllTargets.RemoveAt(0);
+            }
+            else
+            {
+                TargetForAttack = AllTargets[0];
+            }
+            
         }
         if(TargetForAttack != null && (NextShootTime <= Time.time))
         {
