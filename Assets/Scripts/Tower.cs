@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class Tower : MonoBehaviour
 {
     public GameObject Bullet;           // Снаряд, которым атакует башня
@@ -7,8 +7,15 @@ public class Tower : MonoBehaviour
     public int CurrentLevel = 1;        // Текущий уровень башни(всего их три)
 
     public GameObject TargetForAttack;  // Цель, которая попала в зону видимости. Она становится доступной для атаки
+    public List<GameObject> AllTargets;     // Все противники, которые находятся в зоне видимости
+
     public float CooldownTime;
     public float NextShootTime;
+
+    private void Awake()
+    {
+        AllTargets = new List<GameObject>();
+    }
     private void Start()
     {
         NextShootTime = Time.time;
@@ -16,15 +23,30 @@ public class Tower : MonoBehaviour
     }
     public void OnTriggerEnter(Collider collider)
     {
-        print(collider.gameObject.tag);
-        print("Collides!");
-        if(collider.tag == "Enemy" && TargetForAttack == null)
+        if (collider.tag == "Enemy")
         {
-            TargetForAttack = collider.gameObject;
+            AllTargets.Add(collider.gameObject);
+        }
+    }
+
+    public void OnTriggerExit(Collider collider)
+    {
+        if(collider.gameObject == TargetForAttack)
+        {
+            if(collider.gameObject == TargetForAttack)
+            {
+                TargetForAttack = null;
+            }
+            AllTargets.Remove(collider.gameObject);
+
         }
     }
     public void Update()
     {
+        if(TargetForAttack == null && AllTargets.Count != 0)
+        {
+            TargetForAttack = AllTargets[0];
+        }
         if(TargetForAttack != null && (NextShootTime <= Time.time))
         {
             Vector3 direction = TargetForAttack.transform.position - transform.position;
