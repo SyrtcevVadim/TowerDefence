@@ -290,7 +290,6 @@ MonoBehaviour:
   - {fileID: 848473128}
   - {fileID: 1506095210}
   - {fileID: 1350654700}
-  TargetLinkIndex: 0
 --- !u!1 &528250877
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +892,136 @@ MonoBehaviour:
   EnemySpawnCooldown: 3
   TimeForNextSpawn: 0
   MainPath: {fileID: 449652308}
+--- !u!1001 &1001028362
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 43388043799908808, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_Name
+      value: Tesla-tower (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 39.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 37.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764401193544544957, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097465909101406878, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: CooldownTime
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+--- !u!1001 &1249196451
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 43388043799908808, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_Name
+      value: Tesla-tower (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764401193544544957, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097465909101406878, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: CooldownTime
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
 --- !u!1001 &1350654699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1079,6 +1208,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8260484202464819128, guid: ac2e462ebf57ccd4cb0faaa5cfe2bd51, type: 3}
   m_PrefabInstance: {fileID: 1838230666}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1877974882
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 43388043799908808, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_Name
+      value: Tesla-tower (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 80.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 65.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764401193544544957, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097465909101406878, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
+      propertyPath: CooldownTime
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
 --- !u!1 &1905252525
 GameObject:
   m_ObjectHideFlags: 0

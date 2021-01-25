@@ -111,5 +111,5 @@ MonoBehaviour:
   Damage: 50
   Distance: 0
   PassedDistance: 0
-  MovementSpeed: 25
+  MovementSpeed: 70
   Target: {fileID: 0}

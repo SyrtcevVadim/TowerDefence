@@ -13,6 +13,10 @@ public class Bullet : MonoBehaviour
     public GameObject Target;       // Направление полета пули
     public void FixedUpdate()
     {
+        if(Target == null)
+        {
+            Destroy(gameObject);
+        }
         transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, Time.deltaTime * MovementSpeed);
     }
     public void OnTriggerEnter(Collider other)
