@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int MaxPossibleHP = 150;           // ћаксимально возможное количество очков здоровь€
+    public int CurrentHP;                     // “екущее значение очков здоровь€
 
-    // Update is called once per frame
-    void Update()
+    public void Start()
     {
-        
+        CurrentHP = MaxPossibleHP;            // ”станавливаем начальное значение очков здоровь€
+    }
+    public void Update()
+    {
+        if(CurrentHP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
