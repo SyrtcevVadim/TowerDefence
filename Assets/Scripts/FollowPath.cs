@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
-    public MovingPath path;             // Путь ,по которому движется существо
+    public MovingPath Path;             // Путь ,по которому движется существо
 
     public int movementSpeed;           // Скорость движения
-
+    public bool CanMove;
     private IEnumerator<Transform> targetPointInPath;
     public void Start()
     {
-        if(path == null)
+        if(Path == null)
         {
             print("Path equals to null!");
             return;
         }
-        targetPointInPath = path.GetNextPathLink();
+        targetPointInPath = Path.GetNextPathLink();
 
         targetPointInPath.MoveNext();
         if(targetPointInPath.Current == null)
@@ -33,11 +33,14 @@ public class FollowPath : MonoBehaviour
         {
             return;
         }
-        transform.position = Vector3.MoveTowards(transform.position, targetPointInPath.Current.position, Time.deltaTime * movementSpeed);
-        float remainDistance = (targetPointInPath.Current.position - transform.position).sqrMagnitude;
-        if(remainDistance < 0.1f)
+        if (CanMove)
         {
-            targetPointInPath.MoveNext();
+            transform.position = Vector3.MoveTowards(transform.position, targetPointInPath.Current.position, Time.deltaTime * movementSpeed);
+            float remainDistance = (targetPointInPath.Current.position - transform.position).sqrMagnitude;
+            if (remainDistance < 0.1f)
+            {
+                targetPointInPath.MoveNext();
+            }
         }
     }
 }

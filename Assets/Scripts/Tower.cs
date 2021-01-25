@@ -31,6 +31,7 @@ public class Tower : MonoBehaviour
 
     public void OnTriggerExit(Collider collider)
     {
+        print(collider.tag);
         if(collider.gameObject == TargetForAttack)
         {
             if(collider.gameObject == TargetForAttack)

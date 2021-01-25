@@ -25,15 +25,16 @@ public class MovingPath : MonoBehaviour
             yield break;
         }
         
-        while(true)
+        while(TargetLinkIndex != PathLinks.Length)
         {
-            yield return PathLinks[TargetLinkIndex];                            // Вызывается при вызове функции MoveNext() из итератора
-
-            TargetLinkIndex += 1;
-            if(PathLinks.Length == TargetLinkIndex)
+            if (PathLinks.Length == TargetLinkIndex)
             {
                 break;
             }
+            yield return PathLinks[TargetLinkIndex];                            // Вызывается при вызове функции MoveNext() из итератора
+
+            TargetLinkIndex += 1;
+
             if (PathLinks.Length == 1)
             {
                 continue;

@@ -31,15 +31,15 @@ public class LevelGenerator : MonoBehaviour
     }
     public void CreateCitadel()
     {
-        Instantiate(CitadelPrefab, new Vector3(4 * Constants.TERRAIN_CELL_SIZE, CitadelPrefab.transform.localScale.y/2, Constants.LEVEL_HEIGHT*Constants.TERRAIN_CELL_SIZE), Quaternion.identity);
+        Instantiate(CitadelPrefab, new Vector3(4 * Constants.TERRAIN_CELL_SIZE, CitadelPrefab.transform.localScale.y/2, (Constants.LEVEL_HEIGHT-1)*Constants.TERRAIN_CELL_SIZE), Quaternion.identity);
     }
 
     public void OnDrawGizmos()
     {
-        Vector3 bottomLeftCorner = Vector3.zero;
-        Vector3 topLeftCorner = new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT);
-        Vector3 bottomRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, 0);
-        Vector3 topRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, Constants.TERRAIN_CELL_SIZE * (Constants.LEVEL_HEIGHT-1));
+        Vector3 bottomLeftCorner = Vector3.zero - new Vector3(Constants.TERRAIN_CELL_SIZE/2, 0, Constants.TERRAIN_CELL_SIZE/2);
+        Vector3 topLeftCorner = new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2); ;
+        Vector3 bottomRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, 0) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
+        Vector3 topRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT) - new Vector3(Constants.TERRAIN_CELL_SIZE/2, 0, Constants.TERRAIN_CELL_SIZE / 2);
         Gizmos.DrawLine(bottomLeftCorner, topLeftCorner);
         Gizmos.DrawLine(bottomLeftCorner, bottomRightCorner);
         Gizmos.DrawLine(topLeftCorner, topRightCorner);
