@@ -8,39 +8,55 @@ public class FollowPath : MonoBehaviour
 
     public int movementSpeed;           // Скорость движения
     public bool CanMove;
-    private IEnumerator<Transform> targetPointInPath;
+    public int CurrentLinkIndex;
+    //private IEnumerator<Transform> targetPointInPath;
     public void Start()
     {
-        if(Path == null)
-        {
-            print("Path equals to null!");
-            return;
-        }
-        targetPointInPath = Path.GetNextPathLink();
+        CurrentLinkIndex = 0;
+        transform.position = Path.PathLinks[CurrentLinkIndex].position;
+        //if(Path == null)
+        //{
+        //    print("Path equals to null!");
+        //    return;
+        //}
+        //targetPointInPath = Path.GetNextPathLink(0);
 
-        targetPointInPath.MoveNext();
-        if(targetPointInPath.Current == null)
-        {
-            print("Path is null");
-            return;
-        }
-        transform.position = targetPointInPath.Current.position;            // Устанавливаем противника на стартовую точку пути
+        //targetPointInPath.MoveNext();
+        //if(targetPointInPath.Current == null)
+        //{
+        //    print("Path is null");
+        //    return;
+        //}
+        //transform.position = targetPointInPath.Current.position;            // Устанавливаем противника на стартовую точку пути
     }
 
     public void Update()
     {
-        if (targetPointInPath == null || targetPointInPath.Current == null)
+        if(CurrentLinkIndex == Path.PathLinks.Length)
         {
-            return;
+            return;     // Объект пришел к цитадели
         }
-        if (CanMove)
+        if(CanMove)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPointInPath.Current.position, Time.deltaTime * movementSpeed);
-            float remainDistance = (targetPointInPath.Current.position - transform.position).sqrMagnitude;
-            if (remainDistance < 0.1f)
+            transform.position = Vector3.MoveTowards(transform.position, Path.PathLinks[CurrentLinkIndex + 1].position, Time.deltaTime * movementSpeed);
+            float remainDistance = (Path.PathLinks[CurrentLinkIndex + 1].position - transform.position).sqrMagnitude;
+            if(remainDistance < 0.1f)
             {
-                targetPointInPath.MoveNext();
+                CurrentLinkIndex++;
             }
         }
+        //if (targetPointInPath == null || targetPointInPath.Current == null)
+        //{
+        //    return;
+        //}
+        //if (CanMove)
+        //{
+        //    transform.position = Vector3.MoveTowards(transform.position, targetPointInPath.Current.position, Time.deltaTime * movementSpeed);
+        //    float remainDistance = (targetPointInPath.Current.position - transform.position).sqrMagnitude;
+        //    if (remainDistance < 0.1f)
+        //    {
+        //        targetPointInPath.MoveNext();
+        //    }
+        //}
     }
 }

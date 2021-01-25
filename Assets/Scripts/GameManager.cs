@@ -21,13 +21,9 @@ public class GameManager : MonoBehaviour
         TimeForNextSpawn = Time.time;
         CreateWave();
     }
-    private void Start()
-    {
-        
-    }
     private void Update()
     {
-        if (Enemies.Count != 0 && Time.time >= TimeForNextSpawn)
+        if (currentEnemyIndex != Enemies.Count && Time.time >= TimeForNextSpawn)
         {
             GameObject currentEnemy = Enemies[currentEnemyIndex];
             currentEnemy.SetActive(true);
@@ -44,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             print("Противник создан");
             GameObject createdEnemy = Instantiate(EnemyPrefab);
+            createdEnemy.name = "Enemy" + i.ToString();
             createdEnemy.GetComponent<FollowPath>().Path = MainPath;
             createdEnemy.GetComponent<FollowPath>().CanMove = false;
             createdEnemy.SetActive(false);
