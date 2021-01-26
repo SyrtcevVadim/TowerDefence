@@ -4,41 +4,72 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    System.Random psevdoRandomNumberGenerator;
-    public int CurrentLevel;
-
-    public GameObject EnemyPrefab;              
-    public float EnemySpawnCooldown;            // Откат спавна противника в секундах
-    public float TimeForNextSpawn;              // Время, после которого можно заспавнить следующего противника
-
-    public MovingPath MainPath;                 // Главный путь ,по которому перемещаются противники
+    System.Random psevdoRandomNumberGenerator;  // Генератор псевдослучайных чисел. Используется для задания количество противников в волне
+    private int currentLevelNumber;             // Номер текущего уровня
+    //-------------------------------------------------------------------------------------------------------------------------------------
+    [Header("Информация о противниках")]
+    [Tooltip("Объект стандартного тестового противника")]
+    public GameObject EnemyPrefab;
+    [Tooltip("Список врагов, которые появятся в текущей волне")]
     public static List<GameObject> Enemies;
-    public static int currentEnemyIndex = 0;
+    [Tooltip("Задержка создания очередного противника")]
+    [Range(1,10)]
+    public float EnemySpawnCooldown;            // Откат спавна противника в секундах
+    private float timeForNextSpawn;             // Время, после которого можно заспавнить следующего противника
+    //-------------------------------------------------------------------------------------------------------------------------------------
+    [Header("Пути, по которым движутся противники")]
+    [Tooltip("Основной путь для движения противников")]
+    public MovingPath MainPath;                 // Главный путь ,по которому перемещаются противники
+    //-------------------------------------------------------------------------------------------------------------------------------------
+    [Header("Ландшафт игрового уровня")]
+    [Tooltip("Родительский объект, в котором будут храниться объекты ячеек игрового уровня")]
+    public GameObject LevelField;
+    [Tooltip("Ячейка игрового уровня")]
+    public GameObject Terrain;                  // Ячейка игрового уровня. На ней игрок может строить различные здания
+    private GameObject[,] levelCellMatrix;      // Обращение к полям: [координаты по X, координаты по Z]
+    private Vector3 startPosition;              // Позиция, начиная с которой должны генерироваться ячейки игрового уровня. По умолчанию это (0,0,0)
+    //-------------------------------------------------------------------------------------------------------------------------------------
+    [Header("Объекты игрока")]
+    [Tooltip("Цитадель игрока. Главное здание, к которому стремятся противники")]
+    public GameObject CitadelPrefab;            // Player's main building
+    //-------------------------------------------------------------------------------------------------------------------------------------
+    public static int CurrentEnemyIndex = 0;
+    
     private void Awake()
     {
+        CreateFields(Vector3.zero);                                    // Создает ячейки уровня, в которых игрок может строить объекты
+        CreateCitadel(new Vector3(4, 0, Constants.LEVEL_HEIGHT - 1));  // Создает цитадель игрока в указанных координатах
+
+        
+        levelCellMatrix = new GameObject[Constants.LEVEL_HEIGHT, Constants.LEVEL_WIDTH];
+
         Enemies = new List<GameObject>();
         psevdoRandomNumberGenerator = new System.Random();
-        TimeForNextSpawn = Time.time;
+        timeForNextSpawn = Time.time;
         CreateWave();
     }
     private void Update()
     {
-        if (currentEnemyIndex != Enemies.Count && Time.time >= TimeForNextSpawn)
+        if (CurrentEnemyIndex != Enemies.Count && Time.time >= timeForNextSpawn)
         {
-            GameObject currentEnemy = Enemies[currentEnemyIndex];
+            GameObject currentEnemy = Enemies[CurrentEnemyIndex];
             currentEnemy.SetActive(true);
             currentEnemy.GetComponent<FollowPath>().CanMove = true;
-            TimeForNextSpawn += EnemySpawnCooldown;
-            currentEnemyIndex++;
-            print("Создание нового противника. Новое время отката " + TimeForNextSpawn.ToString());
+            timeForNextSpawn += EnemySpawnCooldown;
+            CurrentEnemyIndex++;
+            print("Создание нового противника. Новое время отката " + timeForNextSpawn.ToString());
         }
     }
+    
+    /// <summary>
+    /// Формирует очередную волну противников, которые идут по определенному пути(пока что этот путь - MainPath)
+    /// </summary>
     public void CreateWave()
     {
         int numberOfEnemies = psevdoRandomNumberGenerator.Next(4, 6);
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            print("Противник создан");
+            //print("Противник создан");
             GameObject createdEnemy = Instantiate(EnemyPrefab);
             createdEnemy.name = "Enemy" + i.ToString();
             createdEnemy.GetComponent<FollowPath>().Path = MainPath;
@@ -47,4 +78,60 @@ public class GameManager : MonoBehaviour
             Enemies.Add(createdEnemy);
         }
     }
+
+    /// <summary>
+    /// Создает площадку из ячеек для строительства
+    /// </summary>
+    [ContextMenu("CreateField")]
+    public void CreateFields(Vector3 startPosition)
+    {
+        Vector3 currentPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
+        for (int i = 0; i < Constants.LEVEL_WIDTH; i++)
+        {
+            for (int j = 0; j < Constants.LEVEL_HEIGHT; j++)
+            {
+                GameObject newTerrain = Instantiate(Terrain, currentPosition, Quaternion.identity, LevelField.transform);
+                currentPosition += new Vector3(0, 0, 1 * Constants.TERRAIN_CELL_SIZE);
+                // Добавляем созданную ячейку в матрицу объектов
+                //levelField[i, j] = newTerrain;
+            }
+            currentPosition.z = startPosition.z;
+            currentPosition += new Vector3(1 * Constants.TERRAIN_CELL_SIZE, 0, 0);
+        }
+    }
+    /// <summary>
+    /// Создает цитадель игрока
+    /// </summary>
+    /// <param name="citadelsCoordinates">Позиция для цитадели. Задается координатами (x,0,z)</param>
+    public void CreateCitadel(Vector3 citadelsCoordinates)
+    {
+        Instantiate(CitadelPrefab, 
+            new Vector3(citadelsCoordinates.x * Constants.TERRAIN_CELL_SIZE, 
+            CitadelPrefab.transform.localScale.y / 2, citadelsCoordinates.z * Constants.TERRAIN_CELL_SIZE), 
+            Quaternion.identity);
+    }
+
+        
+    public void OnDrawGizmos()
+    {
+        // Определяет углы стандартного игрового уровня
+        Vector3 bottomLeftCorner = Vector3.zero - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
+        Vector3 topLeftCorner = new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2); ;
+        Vector3 bottomRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, 0) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
+        Vector3 topRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
+        // Отрисовка сетки ячеек
+        // Отрисовывка вертикальных линий
+        for(int i = 0; i <= Constants.LEVEL_WIDTH; i++)
+        {
+            Gizmos.DrawLine(bottomLeftCorner + i * (new Vector3(Constants.TERRAIN_CELL_SIZE, 0, 0)), 
+                topLeftCorner + i * (new Vector3(Constants.TERRAIN_CELL_SIZE, 0, 0)));
+        }
+        // Отрисовка горизонтальных линий
+        for(int i = 0; i <= Constants.LEVEL_HEIGHT; i++)
+        {
+            Gizmos.DrawLine(bottomLeftCorner + i * (new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE)), 
+                bottomRightCorner + i * (new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE)));
+        }
+    }   
+
 }
