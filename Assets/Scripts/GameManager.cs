@@ -86,9 +86,9 @@ public class GameManager : MonoBehaviour
     public void CreateFields(Vector3 startPosition)
     {
         Vector3 currentPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
-        for (int i = 0; i < Constants.LEVEL_HEIGHT; i++)
+        for (int i = 0; i < Constants.LEVEL_WIDTH; i++)
         {
-            for (int j = 0; j < Constants.LEVEL_WIDTH; j++)
+            for (int j = 0; j < Constants.LEVEL_HEIGHT; j++)
             {
                 GameObject newTerrain = Instantiate(Terrain, currentPosition, Quaternion.identity, LevelField.transform);
                 currentPosition += new Vector3(0, 0, 1 * Constants.TERRAIN_CELL_SIZE);
@@ -119,12 +119,19 @@ public class GameManager : MonoBehaviour
         Vector3 topLeftCorner = new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2); ;
         Vector3 bottomRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, 0) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
         Vector3 topRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
-        // ќтрисовывает границы стандартного игрового уровн€
-        Gizmos.DrawLine(bottomLeftCorner, topLeftCorner);
-        Gizmos.DrawLine(bottomLeftCorner, bottomRightCorner);
-        Gizmos.DrawLine(topLeftCorner, topRightCorner);
-        Gizmos.DrawLine(topRightCorner, bottomRightCorner);
-        // TODO: —делать отрисовку сетки €чеек дл€ строительства
-    }
+        // ќтрисовка сетки €чеек
+        // ќтрисовывка вертикальных линий
+        for(int i = 0; i <= Constants.LEVEL_WIDTH; i++)
+        {
+            Gizmos.DrawLine(bottomLeftCorner + i * (new Vector3(Constants.TERRAIN_CELL_SIZE, 0, 0)), 
+                topLeftCorner + i * (new Vector3(Constants.TERRAIN_CELL_SIZE, 0, 0)));
+        }
+        // ќтрисовка горизонтальных линий
+        for(int i = 0; i <= Constants.LEVEL_HEIGHT; i++)
+        {
+            Gizmos.DrawLine(bottomLeftCorner + i * (new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE)), 
+                bottomRightCorner + i * (new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE)));
+        }
+    }   
 
 }
