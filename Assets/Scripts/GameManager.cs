@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
                 GameObject newTerrain = Instantiate(Terrain, currentPosition, Quaternion.identity, LevelField.transform);
                 currentPosition += new Vector3(0, 0, 1 * Constants.TERRAIN_CELL_SIZE);
                 // Добавляем созданную ячейку в матрицу объектов
-                //levelField[i, j] = newTerrain;
+                //levelCellMatrix[i, j] = newTerrain;
             }
             currentPosition.z = startPosition.z;
             currentPosition += new Vector3(1 * Constants.TERRAIN_CELL_SIZE, 0, 0);
