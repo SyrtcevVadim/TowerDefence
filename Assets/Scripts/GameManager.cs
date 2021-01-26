@@ -4,50 +4,60 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    System.Random psevdoRandomNumberGenerator;
-    public int CurrentLevel;
+    System.Random psevdoRandomNumberGenerator;  // Генератор псевдослучайных чисел. Используется для задания количество противников в волне
+    private int currentLevelNumber;             // Номер текущего уровня
 
-    public GameObject EnemyPrefab;              
-    public float EnemySpawnCooldown;            // Откат спавна противника в секундах
-    public float TimeForNextSpawn;              // Время, после которого можно заспавнить следующего противника
-
-    public MovingPath MainPath;                 // Главный путь ,по которому перемещаются противники
+    [Header("Информация о противниках")]
+    [Tooltip("Объект стандартного тестового противника")]
+    public GameObject EnemyPrefab;
+    [Tooltip("Список врагов, которые появятся в текущей волне")]
     public static List<GameObject> Enemies;
-    public static int currentEnemyIndex = 0;
+    [Tooltip("Задержка создания очередного противника")]
+    public float EnemySpawnCooldown;            // Откат спавна противника в секундах
+    private float timeForNextSpawn;             // Время, после которого можно заспавнить следующего противника
 
+    [Header("Пути, по которым движутся противники")]
+    [Tooltip("Основной путь для движения противников")]
+    public MovingPath MainPath;                 // Главный путь ,по которому перемещаются противники
+    
+    public static int CurrentEnemyIndex = 0;
 
+    [Header("Ландшафт игрового уровня")]
+    [Tooltip("Родительский объект, в котором будут храниться объекты ячеек игрового уровня")]
     public GameObject LevelField;
-    public GameObject Terrain;              // Terrain platform prefab
+    [Tooltip("Ячейка игрового уровня")]
+    public GameObject Terrain;                  // Ячейка игрового уровня. На ней игрок может строить различные здания
 
 
-    public Vector3 StartPosition;           // Top left corner coordinates of field
-    public Vector3 CurrentPosition;         // Current platform position
-
+    private Vector3 startPosition;           // Позиция, начиная с которой должны генерироваться ячейки игрового уровня. По умолчанию это (0,0,0)
+    private Vector3 currentPosition;         // Current platform position
+    [Header("Объекты игрока")]
+    [Tooltip("Цитадель игрока. Главное здание, к которому стремятся противники")]
     public GameObject CitadelPrefab;              // Player's main building
 
 
     private void Awake()
     {
-        StartPosition = Vector3.zero;
-        CurrentPosition = Vector3.zero;
+        startPosition = Vector3.zero;
+        currentPosition = Vector3.zero;
         CreateFields();
         CreateCitadel();
 
         Enemies = new List<GameObject>();
         psevdoRandomNumberGenerator = new System.Random();
-        TimeForNextSpawn = Time.time;
+        timeForNextSpawn = Time.time;
         CreateWave();
     }
     private void Update()
     {
-        if (currentEnemyIndex != Enemies.Count && Time.time >= TimeForNextSpawn)
+        if (CurrentEnemyIndex != Enemies.Count && Time.time >= timeForNextSpawn)
         {
-            GameObject currentEnemy = Enemies[currentEnemyIndex];
+            GameObject currentEnemy = Enemies[CurrentEnemyIndex];
             currentEnemy.SetActive(true);
             currentEnemy.GetComponent<FollowPath>().CanMove = true;
-            TimeForNextSpawn += EnemySpawnCooldown;
-            currentEnemyIndex++;
-            print("Создание нового противника. Новое время отката " + TimeForNextSpawn.ToString());
+            timeForNextSpawn += EnemySpawnCooldown;
+            CurrentEnemyIndex++;
+            print("Создание нового противника. Новое время отката " + timeForNextSpawn.ToString());
         }
     }
     public void CreateWave()
@@ -55,7 +65,7 @@ public class GameManager : MonoBehaviour
         int numberOfEnemies = psevdoRandomNumberGenerator.Next(4, 6);
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            print("Противник создан");
+            //print("Противник создан");
             GameObject createdEnemy = Instantiate(EnemyPrefab);
             createdEnemy.name = "Enemy" + i.ToString();
             createdEnemy.GetComponent<FollowPath>().Path = MainPath;
@@ -73,11 +83,11 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < Constants.LEVEL_WIDTH; j++)
             {
-                GameObject newTerrain = Instantiate(Terrain, CurrentPosition, Quaternion.identity, LevelField.transform);
-                CurrentPosition += new Vector3(0, 0, 1 * Constants.TERRAIN_CELL_SIZE);
+                GameObject newTerrain = Instantiate(Terrain, currentPosition, Quaternion.identity, LevelField.transform);
+                currentPosition += new Vector3(0, 0, 1 * Constants.TERRAIN_CELL_SIZE);
             }
-            CurrentPosition.z = StartPosition.z;
-            CurrentPosition += new Vector3(1 * Constants.TERRAIN_CELL_SIZE, 0, 0);
+            currentPosition.z = startPosition.z;
+            currentPosition += new Vector3(1 * Constants.TERRAIN_CELL_SIZE, 0, 0);
         }
     }
     public void CreateCitadel()
