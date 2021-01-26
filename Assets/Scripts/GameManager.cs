@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Список врагов, которые появятся в текущей волне")]
     public static List<GameObject> Enemies;
     [Tooltip("Задержка создания очередного противника")]
+    [Range(1,10)]
     public float EnemySpawnCooldown;            // Откат спавна противника в секундах
     private float timeForNextSpawn;             // Время, после которого можно заспавнить следующего противника
 
@@ -26,22 +27,23 @@ public class GameManager : MonoBehaviour
     [Tooltip("Родительский объект, в котором будут храниться объекты ячеек игрового уровня")]
     public GameObject LevelField;
     [Tooltip("Ячейка игрового уровня")]
-    public GameObject Terrain;                  // Ячейка игрового уровня. На ней игрок может строить различные здания
+    public GameObject Terrain;               // Ячейка игрового уровня. На ней игрок может строить различные здания
 
+    private GameObject[,] levelCellMatrix;         // Обращение к полям стандартное: [номер строки,номер столбца]
 
     private Vector3 startPosition;           // Позиция, начиная с которой должны генерироваться ячейки игрового уровня. По умолчанию это (0,0,0)
-    private Vector3 currentPosition;         // Current platform position
     [Header("Объекты игрока")]
     [Tooltip("Цитадель игрока. Главное здание, к которому стремятся противники")]
-    public GameObject CitadelPrefab;              // Player's main building
+    public GameObject CitadelPrefab;         // Player's main building
 
 
     private void Awake()
     {
-        startPosition = Vector3.zero;
-        currentPosition = Vector3.zero;
-        CreateFields();
-        CreateCitadel();
+        CreateFields(Vector3.zero);                                    // Создает ячейки уровня, в которых игрок может строить объекты
+        CreateCitadel(new Vector3(4, 0, Constants.LEVEL_HEIGHT - 1));  // Создает цитадель игрока в указанных координатах
+
+        
+        levelCellMatrix = new GameObject[Constants.LEVEL_HEIGHT, Constants.LEVEL_WIDTH];
 
         Enemies = new List<GameObject>();
         psevdoRandomNumberGenerator = new System.Random();
@@ -60,6 +62,10 @@ public class GameManager : MonoBehaviour
             print("Создание нового противника. Новое время отката " + timeForNextSpawn.ToString());
         }
     }
+    
+    /// <summary>
+    /// Формирует очередную волну противников, которые идут по определенному пути(пока что этот путь - MainPath)
+    /// </summary>
     public void CreateWave()
     {
         int numberOfEnemies = psevdoRandomNumberGenerator.Next(4, 6);
@@ -75,36 +81,52 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Создает площадку из ячеек для строительства
+    /// </summary>
     [ContextMenu("CreateField")]
-    public void CreateFields()
+    public void CreateFields(Vector3 startPosition)
     {
+        Vector3 currentPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
         for (int i = 0; i < Constants.LEVEL_HEIGHT; i++)
         {
             for (int j = 0; j < Constants.LEVEL_WIDTH; j++)
             {
                 GameObject newTerrain = Instantiate(Terrain, currentPosition, Quaternion.identity, LevelField.transform);
                 currentPosition += new Vector3(0, 0, 1 * Constants.TERRAIN_CELL_SIZE);
+                // Добавляем созданную ячейку в матрицу объектов
+                //levelField[i, j] = newTerrain;
             }
             currentPosition.z = startPosition.z;
             currentPosition += new Vector3(1 * Constants.TERRAIN_CELL_SIZE, 0, 0);
         }
     }
-    public void CreateCitadel()
+    /// <summary>
+    /// Создает цитадель игрока
+    /// </summary>
+    /// <param name="citadelsCoordinates">Позиция для цитадели. Задается координатами (x,0,z)</param>
+    public void CreateCitadel(Vector3 citadelsCoordinates)
     {
-        Instantiate(CitadelPrefab, new Vector3(4 * Constants.TERRAIN_CELL_SIZE, CitadelPrefab.transform.localScale.y / 2, (Constants.LEVEL_HEIGHT - 1) * Constants.TERRAIN_CELL_SIZE), Quaternion.identity);
+        Instantiate(CitadelPrefab, 
+            new Vector3(citadelsCoordinates.x * Constants.TERRAIN_CELL_SIZE, 
+            CitadelPrefab.transform.localScale.y / 2, citadelsCoordinates.z * Constants.TERRAIN_CELL_SIZE), 
+            Quaternion.identity);
     }
 
+        
     public void OnDrawGizmos()
     {
+        // Определяет углы стандартного игрового уровня
         Vector3 bottomLeftCorner = Vector3.zero - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
         Vector3 topLeftCorner = new Vector3(0, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2); ;
         Vector3 bottomRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, 0) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
         Vector3 topRightCorner = new Vector3(Constants.LEVEL_WIDTH * Constants.TERRAIN_CELL_SIZE, 0, Constants.TERRAIN_CELL_SIZE * Constants.LEVEL_HEIGHT) - new Vector3(Constants.TERRAIN_CELL_SIZE / 2, 0, Constants.TERRAIN_CELL_SIZE / 2);
+        // Отрисовывает границы стандартного игрового уровня
         Gizmos.DrawLine(bottomLeftCorner, topLeftCorner);
         Gizmos.DrawLine(bottomLeftCorner, bottomRightCorner);
         Gizmos.DrawLine(topLeftCorner, topRightCorner);
         Gizmos.DrawLine(topRightCorner, bottomRightCorner);
+        // TODO: Сделать отрисовку сетки ячеек для строительства
     }
 
 }
