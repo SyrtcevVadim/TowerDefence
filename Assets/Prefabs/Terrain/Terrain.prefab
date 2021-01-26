@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1247800644621086264}
   - component: {fileID: 8855432659463437322}
   - component: {fileID: 8565174017199221230}
+  - component: {fileID: -4950647465078283608}
+  - component: {fileID: 6652963499406885531}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -81,3 +83,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-4950647465078283608
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737150042223791781}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6652963499406885531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737150042223791781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb2b9433f545ae24e8062fd2debc60c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultTerrainMaterial: {fileID: 2100000, guid: ecf16f94a39133748afee3f98e8b8811, type: 2}
+  SelectedTerrainMaterial: {fileID: 2100000, guid: a7f4f1bb62aaf8542ad5b37bcd69a021, type: 2}
