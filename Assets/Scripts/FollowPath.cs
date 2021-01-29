@@ -17,13 +17,13 @@ public class FollowPath : MonoBehaviour
 
     public void Update()
     {
-        if(CurrentLinkIndex == Path.Length)
+        if(CurrentLinkIndex == Path.Length-1)
         {
             return;     // Объект пришел к цитадели
         }
         if(CanMove)
         {
-            transform.position = Vector3.MoveTowards(transform.position, Path[CurrentLinkIndex + 1].position, Time.deltaTime * movementSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, Path[CurrentLinkIndex + 1].position + new Vector3(0, 1, 0), Time.deltaTime * movementSpeed) ;
 
             float remainDistance = (Path[CurrentLinkIndex + 1].position - transform.position).magnitude;
             if (remainDistance < 2.0f)
