@@ -9,25 +9,10 @@ public class FollowPath : MonoBehaviour
     public int movementSpeed;           // Скорость движения
     public bool CanMove;
     public int CurrentLinkIndex;
-    //private IEnumerator<Transform> targetPointInPath;
     public void Start()
     {
         CurrentLinkIndex = 0;
-        transform.position = Path.PathLinks[CurrentLinkIndex].position;
-        //if(Path == null)
-        //{
-        //    print("Path equals to null!");
-        //    return;
-        //}
-        //targetPointInPath = Path.GetNextPathLink(0);
-
-        //targetPointInPath.MoveNext();
-        //if(targetPointInPath.Current == null)
-        //{
-        //    print("Path is null");
-        //    return;
-        //}
-        //transform.position = targetPointInPath.Current.position;            // Устанавливаем противника на стартовую точку пути
+        transform.position = Path[CurrentLinkIndex].position;
     }
 
     public void Update()
@@ -45,18 +30,5 @@ public class FollowPath : MonoBehaviour
                 CurrentLinkIndex++;
             }
         }
-        //if (targetPointInPath == null || targetPointInPath.Current == null)
-        //{
-        //    return;
-        //}
-        //if (CanMove)
-        //{
-        //    transform.position = Vector3.MoveTowards(transform.position, targetPointInPath.Current.position, Time.deltaTime * movementSpeed);
-        //    float remainDistance = (targetPointInPath.Current.position - transform.position).sqrMagnitude;
-        //    if (remainDistance < 0.1f)
-        //    {
-        //        targetPointInPath.MoveNext();
-        //    }
-        //}
     }
 }
