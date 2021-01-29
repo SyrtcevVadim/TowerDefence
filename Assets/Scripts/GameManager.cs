@@ -33,8 +33,9 @@ public class GameManager : MonoBehaviour
     public GameObject CitadelPrefab;            // Player's main building
     //-------------------------------------------------------------------------------------------------------------------------------------
     [Header("Задержка начала новой волны(в секундах)")]
-    [Range(10, 30)]
+    [Range(10, 100)]
     public float NextWaveCooldown;
+    private float timeForNextWaveStart;
     //-------------------------------------------------------------------------------------------------------------------------------------
     [Header("Волны")]
     [Tooltip("Количество волн на уровне")]
@@ -42,11 +43,6 @@ public class GameManager : MonoBehaviour
     [Tooltip("Номер текущей волны")]
     public int CurrentWaveNumber;
     //-------------------------------------------------------------------------------------------------------------------------------------
-
-    /// <summary>
-    /// Закончена ли текущая волна
-    /// </summary>
-    private bool isWaveEnded;
     
     private void Awake()
     {
@@ -55,21 +51,24 @@ public class GameManager : MonoBehaviour
 
 
         //levelCellMatrix = new GameObject[Constants.LEVEL_HEIGHT, Constants.LEVEL_WIDTH];
-        CurrentWaveNumber = 1;
+        CurrentWaveNumber = 0;
         CurrentWave = new Queue<GameObject>();
         psevdoRandomNumberGenerator = new System.Random();
-        timeForNextSpawn = Time.time;
-        CreateWave();
+        timeForNextSpawn = Time.time;;
     }
     private void Update()
     {
         // Пока на уровне не закончились все волны
         if (CurrentWaveNumber <= NumberOfWaves)
-        {   
+        {
+            if (Time.time >= timeForNextWaveStart)
+            {
+                CreateWave();
+                timeForNextWaveStart += NextWaveCooldown;
+            }
             if (CurrentWave.Count > 0 && Time.time >= timeForNextSpawn)
             {
                 SpawnEnemy();
-                print("Enemy was spawned!");
             }
         }
     }
@@ -79,8 +78,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CreateWave()
     {
-        //isWaveEnded = false;
-        int numberOfEnemies = 10;
+        int numberOfEnemies = psevdoRandomNumberGenerator.Next(10,15);
         MovingPath currentWavePath = Paths[psevdoRandomNumberGenerator.Next(0, Paths.Length)];      // Берем случайный путь для следующей волны
         print("Chosen path: " + currentWavePath.name);
         for (int i = 0; i < numberOfEnemies; i++)
