@@ -55,4 +55,8 @@ public class DifficultyPanel : MonoBehaviour
         InfoPanelText.text = DifficultyDescriptions[(int)CurrentDifficulty];
         
     }
+    public void StartLoadlevel()
+    {
+        SceneLoader.LoadScene("TestLevel");
+    }
 }
