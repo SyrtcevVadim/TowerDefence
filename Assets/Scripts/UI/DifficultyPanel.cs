@@ -1,16 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class DifficultyPanel : MonoBehaviour
 {
-    enum SelectedDifficulty {
-        Easy,
-        Normal,
-        Hard
-    };
+    
     private SelectedDifficulty CurrentDifficulty;
 
     [Tooltip("Объект панели сложности")]
@@ -33,7 +27,7 @@ public class DifficultyPanel : MonoBehaviour
     {
         InfoPanelImage = InfoPanel.GetComponent<Image>();
     }
-    public void DifficultyChoise(string type)
+    public void DifficultyChoice(string type)
     {
         if (!InfoPanel.activeSelf)
         {
@@ -59,5 +53,6 @@ public class DifficultyPanel : MonoBehaviour
         InfoPanelImage.color = DifficultyColors[(int)CurrentDifficulty];
         //изменение текста на панели
         InfoPanelText.text = DifficultyDescriptions[(int)CurrentDifficulty];
+        
     }
 }
