@@ -12,23 +12,25 @@ public class FollowPath : MonoBehaviour
     public void Start()
     {
         CurrentLinkIndex = 0;
-        transform.position = Path[CurrentLinkIndex].position;
+        transform.position = Path[CurrentLinkIndex].position + new Vector3(0,3,0);
     }
 
     public void Update()
     {
-        if(CurrentLinkIndex == Path.PathLinks.Length)
+        if(CurrentLinkIndex == Path.Length-1)
         {
             return;     // Объект пришел к цитадели
         }
         if(CanMove)
         {
-            transform.position = Vector3.MoveTowards(transform.position, Path.PathLinks[CurrentLinkIndex + 1].position, Time.deltaTime * movementSpeed);
-            float remainDistance = (Path.PathLinks[CurrentLinkIndex + 1].position - transform.position).sqrMagnitude;
-            if(remainDistance < 0.1f)
+            transform.position = Vector3.MoveTowards(transform.position, Path[CurrentLinkIndex + 1].position + new Vector3(0, 1, 0), Time.deltaTime * movementSpeed) ;
+
+            float remainDistance = (Path[CurrentLinkIndex + 1].position - transform.position).magnitude;
+            if (remainDistance < 2.0f)
             {
-                CurrentLinkIndex++;
+                 CurrentLinkIndex++;
             }
+            
         }
     }
 }
