@@ -12,7 +12,7 @@ public class FollowPath : MonoBehaviour
     public void Start()
     {
         CurrentLinkIndex = 0;
-        transform.position = Path[CurrentLinkIndex].position;
+        transform.position = Path[CurrentLinkIndex].position + new Vector3(0,3,0);
     }
 
     public void Update()
@@ -23,7 +23,7 @@ public class FollowPath : MonoBehaviour
         }
         if(CanMove)
         {
-            transform.position = Vector3.MoveTowards(transform.position, Path.PathLinks[CurrentLinkIndex + 1].position, Time.deltaTime * movementSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, Path[CurrentLinkIndex + 1].position, Time.deltaTime * movementSpeed);
 
             float remainDistance = (Path[CurrentLinkIndex + 1].position - transform.position).magnitude;
             if (remainDistance < 2.0f)

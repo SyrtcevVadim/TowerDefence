@@ -462,7 +462,7 @@ PrefabInstance:
       objectReference: {fileID: 1585848213}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: NextWaveCooldown
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.size

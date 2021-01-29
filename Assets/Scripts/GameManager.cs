@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public GameObject CitadelPrefab;            // Player's main building
     //-------------------------------------------------------------------------------------------------------------------------------------
     [Header("Задержка начала новой волны(в секундах)")]
-    [Range(10, 100)]
+    [Range(30, 100)]
     public float NextWaveCooldown;
     private float timeForNextWaveStart;
     //-------------------------------------------------------------------------------------------------------------------------------------
