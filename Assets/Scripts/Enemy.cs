@@ -15,8 +15,6 @@ public class Enemy : MonoBehaviour
     {
         if(CurrentHP <= 0)
         {
-            GameManager.Enemies.Remove(gameObject);
-            GameManager.CurrentEnemyIndex--;
             Destroy(gameObject);
         }
     }

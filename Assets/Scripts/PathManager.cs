@@ -6,6 +6,14 @@ public class PathManager : MonoBehaviour
 {
     public MovingPath[] Paths;
 
+    public MovingPath this[int index]
+    {
+        get
+        {
+            return Paths[index];
+        }
+    }
+
     /// <summary>
     /// Отрисовывает все пути на текущем уровне уникальным цветом.
     /// </summary>
