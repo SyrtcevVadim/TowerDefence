@@ -306,7 +306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 851731866464619378, guid: 5b52a4752425d324baf2ecd9b588a0e9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -655,16 +655,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8477700414037367990}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1763212803}
+    - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
+      propertyPath: Paths.Array.data[2]
+      value: 
+      objectReference: {fileID: 2128190323}
     - target: {fileID: 640513560839647933, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: m_RootOrder
       value: 1
