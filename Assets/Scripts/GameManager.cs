@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Объект стандартного тестового противника")]
     public GameObject EnemyPrefab;
     [Tooltip("Список врагов, которые появятся в текущей волне")]
-    public static Queue<GameObject>[] enemyQueues;
+    public static List<Queue<GameObject>> ListOfEnemyQueues;
     [Tooltip("Задержка создания очередного противника(в секундах)")]
     [Range(0,10)]
     public float EnemySpawnCooldown;            // Откат спавна противника в секундах
@@ -51,11 +51,7 @@ public class GameManager : MonoBehaviour
 
         CurrentWaveNumber = 0;
         // На каждый путь создаем очередь из противников
-        enemyQueues = new Queue<GameObject>[Paths.Length];
-        for(int i = 0; i < enemyQueues.Length; i++)
-        {
-            enemyQueues[i] = new Queue<GameObject>();
-        }
+        ListOfEnemyQueues = new List<Queue<GameObject>>();
         psevdoRandomNumberGenerator = new System.Random();
         timeForNextSpawn = Time.time;;
     }
@@ -80,17 +76,19 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CreateWave()
     {
-        int numberOfEnemies = psevdoRandomNumberGenerator.Next(10,15);
-        int currentPathNumber = psevdoRandomNumberGenerator.Next(0, Paths.Length);
-        MovingPath currentWavePath = Paths[currentPathNumber];      // Берем случайный путь для следующей волны
+        int numberOfEnemies = psevdoRandomNumberGenerator.Next(5,7);
+        int currentPathNumber = psevdoRandomNumberGenerator.Next(0, Paths.Length);  // Номер текущего пути
+        MovingPath currentWavePath = Paths[currentPathNumber];                      // Берем случайный путь для следующей волны
+        Queue<GameObject> newQueue = new Queue<GameObject>();                       // Создаем очередь противников для текущей волны
         for (int i = 0; i < numberOfEnemies; i++)
         {
             GameObject createdEnemy = Instantiate(EnemyPrefab);
             createdEnemy.name = "Enemy" + i.ToString();
             createdEnemy.GetComponent<FollowPath>().Path = currentWavePath;
             createdEnemy.SetActive(false);
-            enemyQueues[currentPathNumber].Enqueue(createdEnemy);
+            newQueue.Enqueue(createdEnemy);
         }
+        ListOfEnemyQueues.Add(newQueue);
         timeForNextWaveStart += NextWaveCooldown;
     }
 
@@ -100,12 +98,17 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private void SpawnEnemy()
     {
-        for(int i = 0; i < Paths.Length; i++)
+        for(int i = 0; i < ListOfEnemyQueues.Count; i++)
         {
-            if (enemyQueues[i].Count > 0)
+            if (ListOfEnemyQueues[i].Count > 0)
             {
-                GameObject spawnedEnemy = enemyQueues[i].Dequeue();
+                GameObject spawnedEnemy = ListOfEnemyQueues[i].Dequeue();
                 spawnedEnemy.SetActive(true);
+            }
+            if(ListOfEnemyQueues[i].Count == 0)
+            {   
+                // Если очередь пуста, убираем ее
+                ListOfEnemyQueues.Remove(ListOfEnemyQueues[i]);
             }
         }
         timeForNextSpawn += EnemySpawnCooldown;

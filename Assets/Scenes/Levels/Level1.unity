@@ -504,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 1585848213}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: NextWaveCooldown
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.size
@@ -521,15 +521,15 @@ PrefabInstance:
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 31232547}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8951823853575012020}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 470137736}
     - target: {fileID: 640513560839647933, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: m_RootOrder
       value: 1
