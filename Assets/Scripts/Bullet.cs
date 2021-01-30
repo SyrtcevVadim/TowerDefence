@@ -13,15 +13,19 @@ public class Bullet : MonoBehaviour
     public GameObject Target;       // Направление полета пули
     public void FixedUpdate()
     {
-        if(Target == null)
+        if (Target == null)
         {
             Destroy(gameObject);
         }
-        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, Time.deltaTime * MovementSpeed);
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, Time.deltaTime * MovementSpeed);
+        }
+        
     }
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if(other.gameObject != null && other.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().CurrentHP -= Damage;
             Destroy(gameObject);

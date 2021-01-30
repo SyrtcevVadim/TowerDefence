@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 479381961255581050}
   - component: {fileID: 3290440859635333041}
   - component: {fileID: 9096436991056365095}
+  - component: {fileID: -6411402928647063271}
   - component: {fileID: 540634795562631779}
   - component: {fileID: 9213554961798858629}
-  - component: {fileID: -5962602682278177502}
-  - component: {fileID: -6411402928647063271}
+  - component: {fileID: 2809589404812860764}
   m_Layer: 0
   m_Name: TestEnemyPrefab
   m_TagString: Enemy
@@ -85,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-6411402928647063271
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2923885281298734837}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &540634795562631779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,10 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: {fileID: 0}
-  movementSpeed: 10
-  CanMove: 0
-  CurrentLinkIndex: 0
---- !u!54 &-5962602682278177502
+  MovementSpeed: 17
+--- !u!54 &2809589404812860764
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,18 +140,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
---- !u!65 &-6411402928647063271
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2923885281298734837}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
