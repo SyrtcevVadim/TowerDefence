@@ -52,7 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PathLinks:
   - {fileID: 8160964992217705677}
-  - {fileID: 0}
   - {fileID: 1051703488978860910}
   - {fileID: 1051703488329282633}
   - {fileID: 1051703488114658013}

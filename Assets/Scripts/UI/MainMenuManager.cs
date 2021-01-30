@@ -11,7 +11,7 @@ public class MainMenuManager : MonoBehaviour
     private GameObject difficultyMenu;
     private GameObject settingsMenu;
 
-    private void Start()
+    private void Awake()
     {
         canvas = transform.GetChild(0);
         mainMenu = canvas.Find("MainMenuPanel").gameObject;
