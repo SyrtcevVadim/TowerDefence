@@ -13,7 +13,7 @@ public class FollowPath : MonoBehaviour
     public void Start()
     {
         currentLinkIndex = 0;
-        transform.position = Path[currentLinkIndex].position + new Vector3(0,3,0);
+        transform.position = Path[currentLinkIndex].position;
     }
 
     public void Update()

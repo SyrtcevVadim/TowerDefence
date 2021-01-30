@@ -39,4 +39,21 @@ public class LevelUIController : MonoBehaviour
         //TODO: Вызывать панель предупреждения при нажатии данной кнопки: "Вы точно хотите выйти из игры?"
         Application.Quit();
     }
+
+    public void OnTimeScaleNormalButtonClick()
+    {
+        Time.timeScale = 1.0f;
+    }
+    public void OnTimeScaleOneAndHalfButtonClick()
+    {
+        Time.timeScale = 1.5f;
+    }
+    public void OnTimeScaleZeroAndHalfButtonClick()
+    {
+        Time.timeScale = 0.5f;
+    }
+    public void OnTimeScaleTwoButtonClick()
+    {
+        Time.timeScale = 2.0f;
+    }
 }
