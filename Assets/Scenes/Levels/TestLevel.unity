@@ -759,6 +759,18 @@ PrefabInstance:
       propertyPath: LevelField
       value: 
       objectReference: {fileID: 1905252525}
+    - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
+      propertyPath: Paths.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
+      propertyPath: Paths.Array.data[0]
+      value: 
+      objectReference: {fileID: 312891743}
+    - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
+      propertyPath: Paths.Array.data[1]
+      value: 
+      objectReference: {fileID: 434289878}
     - target: {fileID: 640513560839647933, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: m_RootOrder
       value: 0
