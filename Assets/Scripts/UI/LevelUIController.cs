@@ -12,6 +12,7 @@ public class LevelUIController : MonoBehaviour
 
     public void Awake()
     {
+        Time.timeScale = 1;         // Выравниваем временной поток и искривления пространства :)
         // Настраиваем правильную последовательность слоёв в UI при загрузке сцены
         InterfacePanel.SetActive(true);
         StopGamePanel.SetActive(false);
