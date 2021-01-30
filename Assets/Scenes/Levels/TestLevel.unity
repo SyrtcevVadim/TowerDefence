@@ -576,6 +576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Towers
       objectReference: {fileID: 0}
+    - target: {fileID: 3705545925942783330, guid: 91cbcc4f000b7d941b751b5e332dfec1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3809642070014768815, guid: 91cbcc4f000b7d941b751b5e332dfec1, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -729,7 +733,7 @@ PrefabInstance:
       objectReference: {fileID: 1905252525}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: NextWaveCooldown
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.size
@@ -737,7 +741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: EnemySpawnCooldown
-      value: 2
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 640513560839647932, guid: b35d7c90d652b7f4d9c17c97a16d3208, type: 3}
       propertyPath: Paths.Array.data[0]
