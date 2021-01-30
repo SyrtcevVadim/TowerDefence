@@ -141,5 +141,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: {fileID: 0}
-  MovementSpeed: 5
+  MovementSpeed: 17
   CanMove: 0

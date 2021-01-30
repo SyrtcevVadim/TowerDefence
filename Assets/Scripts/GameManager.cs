@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public GameObject CitadelPrefab;            // Player's main building
     //-------------------------------------------------------------------------------------------------------------------------------------
     [Header("Задержка начала новой волны(в секундах)")]
-    [Range(30, 100)]
+    [Range(10, 100)]
     public float NextWaveCooldown;
     private float timeForNextWaveStart;
     //-------------------------------------------------------------------------------------------------------------------------------------
@@ -46,11 +46,9 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
-        CreateFields(Vector3.zero);                                    // Создает ячейки уровня, в которых игрок может строить объекты
-        CreateCitadel(new Vector3(4, 0, Constants.LEVEL_HEIGHT - 1));  // Создает цитадель игрока в указанных координатах
+        CreateFields(startPosition);                                    // Создает ячейки уровня, в которых игрок может строить объекты
+        CreateCitadel(new Vector3(3, 0, Constants.LEVEL_HEIGHT - 1));  // Создает цитадель игрока в указанных координатах
 
-
-        //levelCellMatrix = new GameObject[Constants.LEVEL_HEIGHT, Constants.LEVEL_WIDTH];
         CurrentWaveNumber = 0;
         CurrentWave = new Queue<GameObject>();
         psevdoRandomNumberGenerator = new System.Random();
@@ -64,9 +62,8 @@ public class GameManager : MonoBehaviour
             if (Time.time >= timeForNextWaveStart)
             {
                 CreateWave();
-                timeForNextWaveStart += NextWaveCooldown;
             }
-            if (CurrentWave.Count > 0 && Time.time >= timeForNextSpawn)
+            else if (CurrentWave.Count > 0 && Time.time >= timeForNextSpawn)
             {
                 SpawnEnemy();
             }
@@ -80,17 +77,15 @@ public class GameManager : MonoBehaviour
     {
         int numberOfEnemies = psevdoRandomNumberGenerator.Next(10,15);
         MovingPath currentWavePath = Paths[psevdoRandomNumberGenerator.Next(0, Paths.Length)];      // Берем случайный путь для следующей волны
-        print("Chosen path: " + currentWavePath.name);
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            //print("Противник создан");
             GameObject createdEnemy = Instantiate(EnemyPrefab);
             createdEnemy.name = "Enemy" + i.ToString();
             createdEnemy.GetComponent<FollowPath>().Path = currentWavePath;
-            createdEnemy.GetComponent<FollowPath>().CanMove = false;
             createdEnemy.SetActive(false);
             CurrentWave.Enqueue(createdEnemy);
         }
+        timeForNextWaveStart += NextWaveCooldown;
     }
 
     /// <summary>
@@ -101,7 +96,6 @@ public class GameManager : MonoBehaviour
     {
         GameObject spawnedEnemy = CurrentWave.Dequeue();
         spawnedEnemy.SetActive(true);
-        spawnedEnemy.GetComponent<FollowPath>().CanMove = true;
         timeForNextSpawn += EnemySpawnCooldown;
     }
 

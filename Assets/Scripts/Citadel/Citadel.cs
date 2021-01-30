@@ -12,6 +12,6 @@ public class Citadel : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CurrentHP -= 50;
-        Destroy(other);
+        Destroy(other.gameObject);
     }
 }
