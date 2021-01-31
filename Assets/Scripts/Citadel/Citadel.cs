@@ -16,7 +16,7 @@ public class Citadel : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        CurrentHP -= 10;
+        CurrentHP -= other.gameObject.GetComponent<Enemy>().DamageP;
         infoUI.UpdateCitadelHPInfo(CurrentHP, MaxPossibleHP);
         Destroy(other.gameObject);
     }
