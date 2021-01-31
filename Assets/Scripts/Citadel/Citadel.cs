@@ -5,13 +5,19 @@ using UnityEngine;
 public class Citadel : MonoBehaviour
 {
     [Tooltip("Максимально возможное количество очков здоровья цитадели")]
-    public int MaxPossibleHP;
+    public float MaxPossibleHP;
     [Tooltip("Текущее количество очков здоровья цитадели")]
-    public int CurrentHP;
-
+    public float CurrentHP;
+    private CitadelInfoManager infoUI;
+    private void Start()
+    {
+        infoUI = GameObject.Find("InterfacePanel").GetComponent<CitadelInfoManager>();
+        infoUI.UpdateCitadelHPInfo(CurrentHP, MaxPossibleHP);
+    }
     private void OnTriggerEnter(Collider other)
     {
-        CurrentHP -= 50;
+        CurrentHP -= other.gameObject.GetComponent<Enemy>().DamageP;
+        infoUI.UpdateCitadelHPInfo(CurrentHP, MaxPossibleHP);
         Destroy(other.gameObject);
     }
 }
