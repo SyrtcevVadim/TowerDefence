@@ -19,7 +19,7 @@ public class Tower : MonoBehaviour
     private void Start()
     {
         NextShootTime = Time.time;
-        print(NextShootTime.ToString());
+        //print(NextShootTime.ToString());
     }
     public void OnTriggerEnter(Collider collider)
     {
@@ -31,7 +31,7 @@ public class Tower : MonoBehaviour
 
     public void OnTriggerExit(Collider collider)
     {
-        print(collider.tag);
+        //print(collider.tag);
         if(collider.gameObject == TargetForAttack)
         {
             if(collider.gameObject == TargetForAttack)

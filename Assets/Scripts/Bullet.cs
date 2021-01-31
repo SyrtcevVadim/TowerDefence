@@ -11,6 +11,9 @@ public class Bullet : MonoBehaviour
     public int MovementSpeed;       // Скорость полета пули
 
     public GameObject Target;       // Направление полета пули
+
+    public Effect effect;
+
     public void FixedUpdate()
     {
         if (Target == null)
@@ -28,6 +31,10 @@ public class Bullet : MonoBehaviour
         if(other.gameObject != null && other.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().CurrentHP -= Damage;
+            if (effect.isSet)
+            {
+                other.gameObject.AddComponent<EffectSystem>().Initialise(effect);
+            }
             Destroy(gameObject);
         }
     }

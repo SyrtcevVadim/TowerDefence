@@ -7,6 +7,9 @@ public class FollowPath : MonoBehaviour
     [Header("Движение юнита")]
     [Tooltip("Скорость передвижения")]
     public int MovementSpeed;           // Скорость движения
+    [Space()]
+    [Tooltip("Величина замедления")]
+    public int SpeedDecrease = 0;
     [Tooltip("Флаг, показывающий, может ли объект совершать перемещение в данный момент времени")]
     private int currentLinkIndex;
     private Vector3 offsetVector;              // Смещение движения юнита относительно траектории пути
@@ -28,7 +31,10 @@ public class FollowPath : MonoBehaviour
         {
             return;     // Объект пришел к цитадели
         }
-        transform.position = Vector3.MoveTowards(transform.position, Path[currentLinkIndex + 1].position + offsetVector, Time.deltaTime * MovementSpeed) ;
+        if(SpeedDecrease < MovementSpeed)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, Path[currentLinkIndex + 1].position + offsetVector, Time.deltaTime * (MovementSpeed - SpeedDecrease));
+        }
 
         float remainDistance = (Path[currentLinkIndex + 1].position +offsetVector - transform.position).magnitude;
         if (remainDistance < 0.01f)
