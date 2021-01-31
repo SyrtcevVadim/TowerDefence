@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1371854574698947927}
   m_Layer: 0
   m_Name: Citadel
-  m_TagString: Untagged
+  m_TagString: Citadel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,5 +108,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba4feba11ff9f747937e11a41fff175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPossibleHP: 0
-  CurrentHP: 0
+  MaxPossibleHP: 400
+  CurrentHP: 400
