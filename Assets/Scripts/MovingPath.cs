@@ -11,6 +11,7 @@ public class MovingPath : MonoBehaviour
             return PathLinks[index];
         }
     }
+
     public int Length
     {
         get
