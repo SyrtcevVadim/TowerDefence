@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2809589404812860764}
   - component: {fileID: 540634795562631779}
   - component: {fileID: 9213554961798858629}
+  - component: {fileID: 1921076967951521760}
   m_Layer: 0
   m_Name: TestEnemyPrefab
   m_TagString: Enemy
@@ -143,3 +144,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: {fileID: 0}
   MovementSpeed: 17
+  SpeedDecrease: 0
+--- !u!114 &1921076967951521760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2923885281298734837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ca98e38e9e9be4587ad3fc04309943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FreezeAmount: 0
+  DamageAmount: 0
+  Time: 0
+  isInitialised: 0

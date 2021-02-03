@@ -23,7 +23,7 @@ public class Tower : MonoBehaviour
     }
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Enemy")
+        if (collider.CompareTag("Enemy"))
         {
             AllTargets.Add(collider.gameObject);
         }
@@ -59,7 +59,6 @@ public class Tower : MonoBehaviour
         }
         if(TargetForAttack != null && (NextShootTime <= Time.time))
         {
-            Vector3 direction = TargetForAttack.transform.position - transform.position;
             GameObject bullet = Instantiate(Bullet, BulletPlace.transform.position, Quaternion.identity);
             bullet.GetComponent<Bullet>().Target = TargetForAttack;
             NextShootTime = Time.time + CooldownTime;
