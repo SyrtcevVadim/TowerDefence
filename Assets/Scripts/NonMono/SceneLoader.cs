@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -13,9 +12,23 @@ public static class SceneLoader
     public static GameObject ContinueText;
 
     public class SceneLoaderMonobehaviour : MonoBehaviour { };
-
+    /// <summary>
+    /// Загружает сцену scene, показывая загрузочный экран
+    /// </summary>
+    /// <param name="SceneName">Название загружаемой сцены</param>
     public static void LoadScene(string SceneName)
     {
+        Scene sceneToLoad = SceneManager.GetSceneByName(SceneName);
+        if (!sceneToLoad.IsValid())
+        {
+            Debug.LogError("SceneLoader: Invalid Scene name");
+            return;
+        }
+        if(sceneToLoad == SceneManager.GetActiveScene())
+        {
+            Debug.LogWarning("SceneLoader: Attempt to load active scene, refused");
+            return;
+        }
         onLoadingSceneCallback = () =>
         {
             GameObject LoadingGameObject = new GameObject();
@@ -27,7 +40,6 @@ public static class SceneLoader
     public static IEnumerator LoadSceneAsync(string SceneName)
     {
         Scene LoadingScene = SceneManager.GetActiveScene();
-        GameObject RootGameObject = LoadingScene.GetRootGameObjects()[0];
         AsyncOperation LoadingOperation = SceneManager.LoadSceneAsync(SceneName);
         LoadingOperation.allowSceneActivation = false;
         while (!LoadingOperation.isDone)
