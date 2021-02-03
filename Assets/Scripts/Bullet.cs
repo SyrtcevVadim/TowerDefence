@@ -14,6 +14,11 @@ public class Bullet : MonoBehaviour
 
     public Effect effect;
 
+    private void Start()
+    {
+        effect = new Effect("test", 10f, 20, 1d);
+    }
+
     public void FixedUpdate()
     {
         if (Target == null)
@@ -28,12 +33,12 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject != null && other.tag == "Enemy")
+        if(other.gameObject != null && other.CompareTag("Enemy"))
         {
             other.gameObject.GetComponent<Enemy>().CurrentHP -= Damage;
             if (effect.isSet)
             {
-                other.gameObject.AddComponent<EffectSystem>().Initialise(effect);
+                other.gameObject.AddComponent<EffectSystem>().Initialize(effect);
             }
             Destroy(gameObject);
         }

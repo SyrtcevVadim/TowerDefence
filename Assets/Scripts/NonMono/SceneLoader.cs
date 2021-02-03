@@ -39,7 +39,6 @@ public static class SceneLoader
     }
     public static IEnumerator LoadSceneAsync(string SceneName)
     {
-        Scene LoadingScene = SceneManager.GetActiveScene();
         AsyncOperation LoadingOperation = SceneManager.LoadSceneAsync(SceneName);
         LoadingOperation.allowSceneActivation = false;
         while (!LoadingOperation.isDone)
