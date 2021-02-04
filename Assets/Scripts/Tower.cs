@@ -61,6 +61,7 @@ public class Tower : MonoBehaviour
         {
             GameObject bullet = Instantiate(Bullet, AttackPlace.transform.position, Quaternion.identity);
             bullet.GetComponent<Projectile>().Target = Target;
+            Debug.DrawRay(AttackPlace.transform.position, Target.transform.position - AttackPlace.transform.position, Color.cyan, 3.0f);
             NextShootTime = Time.time + ShootCooldownTime;
         }
 
