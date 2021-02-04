@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
+    [Header("Пути, доступные противникам на уровне для передвижения")]
     public MovingPath[] Paths;
 
     public MovingPath this[int index]

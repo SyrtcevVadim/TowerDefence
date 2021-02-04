@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Space()]
+    [Header("ќчки здоровь€")]
+    [Tooltip("ћаксимально возможное количество очков здоровь€(оно же и начальное)")]
     public float MaxPossibleHP = 150.0f;      // ћаксимально возможное количество очков здоровь€
+    [Tooltip("“екущее количество очков здоровь€")]
     public float CurrentHP;                   // “екущее значение очков здоровь€
+    [Tooltip("”рон, наносимый при столкновении существа с цитаделью игрока")]
     public float DamageP;                     // ”рон, наносимый цитадели при столкновении с ней
+
     public void Start()
     {
         CurrentHP = MaxPossibleHP;            // ”станавливаем начальное значение очков здоровь€
