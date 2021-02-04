@@ -2,25 +2,26 @@ using UnityEngine;
 using System.Collections.Generic;
 public class Tower : MonoBehaviour
 {
-    public GameObject Bullet;           // Снаряд, которым атакует башня
-    public GameObject BulletPlace;      // Место, откуда вылетают снаряды башни
-    public int CurrentLevel = 1;        // Текущий уровень башни(всего их три)
+    public GameObject Bullet;               // Снаряд, которым атакует башня
+    public GameObject AttackPlace;          // Место, откуда вылетают снаряды башни
+    public int CurrentLevel = 1;            // Текущий уровень башни(всего их три)
 
-    public GameObject TargetForAttack;  // Цель, которая попала в зону видимости. Она становится доступной для атаки
-    public List<GameObject> AllTargets;     // Все противники, которые находятся в зоне видимости
+    public GameObject Target;               // Противник, которого башня атакует
+    public List<GameObject> AllTargets;     // Все противники, находящиеся в зоне видимости
 
-    public float CooldownTime;
+    public float ShootCooldownTime;         // Время, необходимое башне на подготовку выстрела
     public float NextShootTime;
 
     private void Awake()
     {
         AllTargets = new List<GameObject>();
     }
+
     private void Start()
     {
         NextShootTime = Time.time;
-        //print(NextShootTime.ToString());
     }
+    
     public void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Enemy"))
@@ -31,37 +32,36 @@ public class Tower : MonoBehaviour
 
     public void OnTriggerExit(Collider collider)
     {
-        //print(collider.tag);
-        if(collider.gameObject == TargetForAttack)
+        GameObject go = collider.gameObject;
+        if(go.CompareTag("Enemy"))
         {
-            if(collider.gameObject == TargetForAttack)
+            if(go == Target)
             {
-                TargetForAttack = null;
+                Target = null;
             }
-            AllTargets.Remove(collider.gameObject);
-
+            AllTargets.Remove(go);
         }
     }
     public void Update()
     {
-        
-        if(TargetForAttack == null && AllTargets.Count != 0)
+
+        if (Target == null && AllTargets.Count != 0)
         {
             if (AllTargets[0] == null)
             {
                 AllTargets.RemoveAt(0);
             }
-            else
+            if (AllTargets.Count != 0 && AllTargets[0] != null)
             {
-                TargetForAttack = AllTargets[0];
+                Target = AllTargets[0];
             }
-            
         }
-        if(TargetForAttack != null && (NextShootTime <= Time.time))
+
+        if(Target != null && (NextShootTime <= Time.time))
         {
-            GameObject bullet = Instantiate(Bullet, BulletPlace.transform.position, Quaternion.identity);
-            bullet.GetComponent<Bullet>().Target = TargetForAttack;
-            NextShootTime = Time.time + CooldownTime;
+            GameObject bullet = Instantiate(Bullet, AttackPlace.transform.position, Quaternion.identity);
+            bullet.GetComponent<Projectile>().Target = Target;
+            NextShootTime = Time.time + ShootCooldownTime;
         }
 
     }

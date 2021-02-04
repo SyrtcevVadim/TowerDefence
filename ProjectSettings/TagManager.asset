@@ -5,10 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tower
-  - Bullet
   - Enemy
   - PathStart
   - Citadel
+  - Projectile
   layers:
   - Default
   - TransparentFX

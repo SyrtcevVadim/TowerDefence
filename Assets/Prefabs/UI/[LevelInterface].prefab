@@ -1765,11 +1765,11 @@ MonoBehaviour:
   CitadelHPLabel: {fileID: 8047826388996714821}
   citadelInfoPanel: {fileID: 3476829180385484999}
   playerCitadel: {fileID: 0}
-  HP80_100PercentageColor: {r: 0, g: 0.4056604, b: 0.061127737, a: 0}
-  HP60_80PercentageColor: {r: 0.22078538, g: 1, b: 0, a: 0}
-  HP40_60PercentageColor: {r: 0.8832879, g: 1, b: 0, a: 0}
-  HP20_40PercentageColor: {r: 1, g: 0.6173746, b: 0, a: 0}
-  HP0_20PercentageColor: {r: 1, g: 0, b: 0, a: 0}
+  HP80_100PercentageColor: {r: 0, g: 0.4056604, b: 0.061127737, a: 1}
+  HP60_80PercentageColor: {r: 0.22078538, g: 1, b: 0, a: 1}
+  HP40_60PercentageColor: {r: 0.8832879, g: 1, b: 0, a: 1}
+  HP20_40PercentageColor: {r: 1, g: 0.6173746, b: 0, a: 1}
+  HP0_20PercentageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1702542331808417858
 GameObject:
   m_ObjectHideFlags: 0
