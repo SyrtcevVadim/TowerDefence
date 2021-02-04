@@ -8,11 +8,7 @@ public class Projectile : MonoBehaviour
 
     public GameObject Target;       // Цель, за которой следует снаряд
 
-    //public Effect effect;
-
-    private void Start()
-    {
-    }
+    public Tower OwnerTower;   // Башня, из которой произошел выстрел данным снарядом
 
     public void FixedUpdate()
     {

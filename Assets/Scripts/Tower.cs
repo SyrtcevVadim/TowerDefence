@@ -12,13 +12,20 @@ public class Tower : MonoBehaviour
     public float ShootCooldownTime;         // Время, необходимое башне на подготовку выстрела
     public float NextShootTime;
 
-    private void Awake()
+
+    private int killCounter;
+    public int KillCounter
     {
-        AllTargets = new List<GameObject>();
+        get
+        {
+            return KillCounter;
+        }
     }
 
     private void Start()
     {
+        AllTargets = new List<GameObject>();
+        SetKillCounter(0);
         NextShootTime = Time.time;
     }
     
@@ -60,7 +67,9 @@ public class Tower : MonoBehaviour
         if(Target != null && (NextShootTime <= Time.time))
         {
             GameObject bullet = Instantiate(Bullet, AttackPlace.transform.position, Quaternion.identity);
-            bullet.GetComponent<Projectile>().Target = Target;
+            Projectile projectile = bullet.GetComponent<Projectile>();
+            projectile.Target = Target;
+            projectile.OwnerTower = GetComponent<Tower>();
             Debug.DrawRay(AttackPlace.transform.position, Target.transform.position - AttackPlace.transform.position, Color.cyan, 3.0f);
             NextShootTime = Time.time + ShootCooldownTime;
         }
@@ -73,4 +82,12 @@ public class Tower : MonoBehaviour
         // Добавление новых визуальных компонентов
     }
     
+    public void IncreaseKillCounter()
+    {
+        killCounter++;
+    }
+    public void SetKillCounter(int value)
+    {
+        killCounter = value;
+    }
 }

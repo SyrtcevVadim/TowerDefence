@@ -11,20 +11,19 @@ public class Enemy : MonoBehaviour
     {
         CurrentHP = MaxPossibleHP;            // ”станавливаем начальное значение очков здоровь€
     }
-    public void Update()
-    {
-        if(CurrentHP <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
+        GameObject go = collision.gameObject;
         // ѕри столкновении с пулей существу наноситс€ урон
-        if(collision.gameObject.CompareTag("Projectile"))
+        if(go.CompareTag("Projectile"))
         {
-            CurrentHP -= collision.gameObject.GetComponent<Projectile>().Damage;
+            CurrentHP -= go.GetComponent<Projectile>().Damage;
+            if(CurrentHP <= 0.0f)
+            {
+                go.GetComponent<Projectile>().OwnerTower.IncreaseKillCounter();
+                print("Killer: " + go.GetComponent<Projectile>().OwnerTower.name);
+            }
         }
     }
 }
