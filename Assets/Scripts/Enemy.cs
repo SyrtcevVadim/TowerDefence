@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
             if(CurrentHP <= 0.0f)
             {
                 go.GetComponent<Projectile>().OwnerTower.IncreaseKillCounter();
-                print("Killer: " + go.GetComponent<Projectile>().OwnerTower.name);
             }
         }
     }
