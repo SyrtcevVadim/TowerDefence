@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Tower
   - Enemy
-  - PathStart
   - Citadel
   - Projectile
+  - Path
   layers:
   - Default
   - TransparentFX

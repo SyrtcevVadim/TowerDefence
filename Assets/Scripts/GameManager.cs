@@ -48,7 +48,12 @@ public class GameManager : MonoBehaviour
     {
         CreateFields(startPosition);                                    // Создает ячейки уровня, в которых игрок может строить объекты
         CreateCitadel(new Vector3(3, 0, Constants.LEVEL_HEIGHT - 1));  // Создает цитадель игрока в указанных координатах
-
+        var pathObjects = GameObject.FindGameObjectsWithTag("Path");
+        Paths = new MovingPath[pathObjects.Length];
+        for(int i = 0; i < pathObjects.Length; i++)
+        {
+            Paths[i] = pathObjects[i].GetComponent<MovingPath>();
+        }
         CurrentWaveNumber = 0;
         // На каждый путь создаем очередь из противников
         ListOfEnemyQueues = new List<Queue<GameObject>>();
