@@ -2,25 +2,32 @@ using UnityEngine;
 using System.Collections.Generic;
 public class Tower : MonoBehaviour
 {
+    [Space()]
+    [Header("Снаряжение башни")]
+    [Tooltip("Снаряд, которым башня атакует противника")]
     public GameObject Bullet;               // Снаряд, которым атакует башня
+    [Tooltip("Место, откуда вылетают снаряды башни")]
     public GameObject AttackPlace;          // Место, откуда вылетают снаряды башни
+    [Tooltip("Текущий уровень башни")]
     public int CurrentLevel = 1;            // Текущий уровень башни(всего их три)
 
+    [Space()]
+    [Header("Отслеживаемые башней противники")]
+    [Tooltip("Главная цель башни. Её атакует башня")]
     public GameObject Target;               // Противник, которого башня атакует
+    [Tooltip("Список всех целей башни")]
     public List<GameObject> AllTargets;     // Все противники, находящиеся в зоне видимости
 
-    public float ShootCooldownTime;         // Время, необходимое башне на подготовку выстрела
+    [Space()]
+    [Header("Информация о стрельбе")]
+    [Tooltip("Перезарядка башни при стрельбе в секундах")]
+    public float ShootCooldownTime;         // Время, необходимое башне на подготовку 
     public float NextShootTime;
 
-
-    private int killCounter;
-    public int KillCounter
-    {
-        get
-        {
-            return KillCounter;
-        }
-    }
+    [Space()]
+    [Header("Статистика башни")]
+    [Tooltip("Количество убитых башней противников")]
+    public int KillCounter;
 
     private void Start()
     {
@@ -31,9 +38,10 @@ public class Tower : MonoBehaviour
     
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Enemy"))
+        GameObject go = collider.gameObject;
+        if (go.CompareTag("Enemy"))
         {
-            AllTargets.Add(collider.gameObject);
+            AllTargets.Add(go);
         }
     }
 
@@ -84,10 +92,10 @@ public class Tower : MonoBehaviour
     
     public void IncreaseKillCounter()
     {
-        killCounter++;
+        KillCounter++;
     }
     public void SetKillCounter(int value)
     {
-        killCounter = value;
+        KillCounter = value;
     }
 }
