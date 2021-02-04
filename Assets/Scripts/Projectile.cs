@@ -26,16 +26,4 @@ public class Projectile : MonoBehaviour
         }
         
     }
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject != null && other.CompareTag("Enemy"))
-        {
-            other.gameObject.GetComponent<Enemy>().CurrentHP -= Damage;
-            //if (effect.isSet)
-            //{
-            //    other.gameObject.AddComponent<EffectSystem>().Initialize(effect);
-            //}
-            Destroy(gameObject);
-        }
-    }
 }
