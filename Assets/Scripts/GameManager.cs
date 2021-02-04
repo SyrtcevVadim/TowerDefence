@@ -35,11 +35,11 @@ public class GameManager : MonoBehaviour
     [Header("Задержка начала новой волны(в секундах)")]
     [Range(0, 100)]
     public float NextWaveCooldown;
-    private float timeForNextWaveStart;
+    public float TimeForNextWaveStart;
     //-------------------------------------------------------------------------------------------------------------------------------------
     [Header("Волны")]
     [Tooltip("Количество волн на уровне")]
-    public int NumberOfWaves = 10;
+    public int TotalWaveNumber = 10;
     [Tooltip("Номер текущей волны")]
     public int CurrentWaveNumber;
     //-------------------------------------------------------------------------------------------------------------------------------------
@@ -63,9 +63,9 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // Пока на уровне не закончились все волны
-        if (CurrentWaveNumber <= NumberOfWaves)
+        if (CurrentWaveNumber <= TotalWaveNumber)
         {
-            if (Time.time >= timeForNextWaveStart)
+            if (Time.time >= TimeForNextWaveStart)
             {
                 CreateWave();
             }
@@ -94,7 +94,8 @@ public class GameManager : MonoBehaviour
             newQueue.Enqueue(createdEnemy);
         }
         ListOfEnemyQueues.Add(newQueue);
-        timeForNextWaveStart += NextWaveCooldown;
+        TimeForNextWaveStart += NextWaveCooldown;
+        CurrentWaveNumber++;
     }
 
     /// <summary>
