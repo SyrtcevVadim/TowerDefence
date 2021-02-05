@@ -30,7 +30,6 @@ public class CitadelInfoManager : MonoBehaviour
     public void UpdateCitadelHPInfo(float currentCitadelHP, float maxCitadelHP)
     {
         int percentage = (int)((currentCitadelHP / maxCitadelHP) * 100);
-        print(percentage);
         if((80 <= percentage) && (percentage <=100))
         {
             citadelInfoPanel.color = HP80_100PercentageColor;

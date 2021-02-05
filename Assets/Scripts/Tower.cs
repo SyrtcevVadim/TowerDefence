@@ -2,66 +2,84 @@ using UnityEngine;
 using System.Collections.Generic;
 public class Tower : MonoBehaviour
 {
-    public GameObject Bullet;           // Снаряд, которым атакует башня
-    public GameObject BulletPlace;      // Место, откуда вылетают снаряды башни
-    public int CurrentLevel = 1;        // Текущий уровень башни(всего их три)
+    [Space()]
+    [Header("Снаряжение башни")]
+    [Tooltip("Снаряд, которым башня атакует противника")]
+    public GameObject Bullet;               // Снаряд, которым атакует башня
+    [Tooltip("Место, откуда вылетают снаряды башни")]
+    public GameObject AttackPlace;          // Место, откуда вылетают снаряды башни
+    [Tooltip("Текущий уровень башни")]
+    public int CurrentLevel = 1;            // Текущий уровень башни(всего их три)
 
-    public GameObject TargetForAttack;  // Цель, которая попала в зону видимости. Она становится доступной для атаки
-    public List<GameObject> AllTargets;     // Все противники, которые находятся в зоне видимости
+    [Space()]
+    [Header("Отслеживаемые башней противники")]
+    [Tooltip("Главная цель башни. Её атакует башня")]
+    public GameObject Target;               // Противник, которого башня атакует
+    [Tooltip("Список всех целей башни")]
+    public List<GameObject> AllTargets;     // Все противники, находящиеся в зоне видимости
 
-    public float CooldownTime;
+    [Space()]
+    [Header("Информация о стрельбе")]
+    [Tooltip("Перезарядка башни при стрельбе в секундах")]
+    public float ShootCooldownTime;         // Время, необходимое башне на подготовку 
     public float NextShootTime;
 
-    private void Awake()
-    {
-        AllTargets = new List<GameObject>();
-    }
+    [Space()]
+    [Header("Статистика башни")]
+    [Tooltip("Количество убитых башней противников")]
+    public int KillCounter;
+
     private void Start()
     {
+        AllTargets = new List<GameObject>();
+        SetKillCounter(0);
         NextShootTime = Time.time;
-        //print(NextShootTime.ToString());
     }
+    
     public void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag("Enemy"))
+        GameObject go = collider.gameObject;
+        if (go.CompareTag("Enemy"))
         {
-            AllTargets.Add(collider.gameObject);
+            AllTargets.Add(go);
         }
     }
 
     public void OnTriggerExit(Collider collider)
     {
-        //print(collider.tag);
-        if(collider.gameObject == TargetForAttack)
+        GameObject go = collider.gameObject;
+        if(go.CompareTag("Enemy"))
         {
-            if(collider.gameObject == TargetForAttack)
+            if(go == Target)
             {
-                TargetForAttack = null;
+                Target = null;
             }
-            AllTargets.Remove(collider.gameObject);
-
+            AllTargets.Remove(go);
         }
     }
     public void Update()
     {
-        
-        if(TargetForAttack == null && AllTargets.Count != 0)
+
+        if (Target == null && AllTargets.Count != 0)
         {
             if (AllTargets[0] == null)
             {
                 AllTargets.RemoveAt(0);
             }
-            else
+            if (AllTargets.Count != 0 && AllTargets[0] != null)
             {
-                TargetForAttack = AllTargets[0];
+                Target = AllTargets[0];
             }
-            
         }
-        if(TargetForAttack != null && (NextShootTime <= Time.time))
+
+        if(Target != null && (NextShootTime <= Time.time))
         {
-            GameObject bullet = Instantiate(Bullet, BulletPlace.transform.position, Quaternion.identity);
-            bullet.GetComponent<Bullet>().Target = TargetForAttack;
-            NextShootTime = Time.time + CooldownTime;
+            GameObject bullet = Instantiate(Bullet, AttackPlace.transform.position, Quaternion.identity);
+            Projectile projectile = bullet.GetComponent<Projectile>();
+            projectile.Target = Target;
+            projectile.OwnerTower = GetComponent<Tower>();
+            Debug.DrawRay(AttackPlace.transform.position, Target.transform.position - AttackPlace.transform.position, Color.cyan, 3.0f);
+            NextShootTime = Time.time + ShootCooldownTime;
         }
 
     }
@@ -72,4 +90,12 @@ public class Tower : MonoBehaviour
         // Добавление новых визуальных компонентов
     }
     
+    public void IncreaseKillCounter()
+    {
+        KillCounter++;
+    }
+    public void SetKillCounter(int value)
+    {
+        KillCounter = value;
+    }
 }

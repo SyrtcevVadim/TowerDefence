@@ -61,8 +61,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 2613648972605124339, guid: 47b6869afd424ac4c84eb2ad3e0a0dee, type: 3}
-  BulletPlace: {fileID: 3792323374702569979}
+  AttackPlace: {fileID: 3792323374702569979}
   CurrentLevel: 1
+  Target: {fileID: 0}
+  AllTargets: []
+  ShootCooldownTime: 3
+  NextShootTime: 0
 --- !u!1 &95367786371822962
 GameObject:
   m_ObjectHideFlags: 0

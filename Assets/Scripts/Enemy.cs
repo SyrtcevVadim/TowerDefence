@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int MaxPossibleHP = 150;           // ћаксимально возможное количество очков здоровь€
-    public int CurrentHP;                     // “екущее значение очков здоровь€
-    public float DamageP;                     // ”рон, наносимый при атаке
+    [Space()]
+    [Header("ќчки здоровь€")]
+    [Tooltip("ћаксимально возможное количество очков здоровь€(оно же и начальное)")]
+    public float MaxPossibleHP = 150.0f;      // ћаксимально возможное количество очков здоровь€
+    [Tooltip("“екущее количество очков здоровь€")]
+    public float CurrentHP;                   // “екущее значение очков здоровь€
+    [Tooltip("”рон, наносимый при столкновении существа с цитаделью игрока")]
+    public float DamageP;                     // ”рон, наносимый цитадели при столкновении с ней
+
     public void Start()
     {
         CurrentHP = MaxPossibleHP;            // ”станавливаем начальное значение очков здоровь€
     }
-    public void Update()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if(CurrentHP <= 0)
+        GameObject go = collision.gameObject;
+        // ѕри столкновении с пулей существу наноситс€ урон
+        if(go.CompareTag("Projectile"))
         {
-            Destroy(gameObject);
+            CurrentHP -= go.GetComponent<Projectile>().Damage;
+            if(CurrentHP <= 0.0f)
+            {
+                go.GetComponent<Projectile>().OwnerTower.IncreaseKillCounter();
+            }
         }
     }
 }
